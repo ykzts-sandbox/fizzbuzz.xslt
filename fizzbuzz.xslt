@@ -14,11 +14,6 @@
 
   <template name="fizzbuzz">
     <param name="number" select="1"/>
-    <if test="$number &gt; 1">
-      <call-template name="fizzbuzz">
-        <with-param name="number" select="$number - 1"/>
-      </call-template>
-    </if>
     <variable name="fizzbuzz">
       <call-template name="fizz">
         <with-param name="number" select="$number"/>
@@ -27,6 +22,11 @@
         <with-param name="number" select="$number"/>
       </call-template>
     </variable>
+    <if test="$number &gt; 1">
+      <call-template name="fizzbuzz">
+        <with-param name="number" select="$number - 1"/>
+      </call-template>
+    </if>
     <choose>
       <when test="string-length($fizzbuzz) &gt; 0">
         <value-of select="$fizzbuzz"/>
