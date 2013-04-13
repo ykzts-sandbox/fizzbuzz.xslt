@@ -5,11 +5,23 @@
 
   <template match="/">
     <variable name="result">
-      <call-template name="fizzbuzz">
+      <call-template name="count-number">
         <with-param name="number" select="$number"/>
       </call-template>
     </variable>
     <value-of select="$result"/>
+  </template>
+
+  <template name="count-number">
+    <param name="number" select="1"/>
+    <if test="$number &gt; 1">
+      <call-template name="count-number">
+        <with-param name="number" select="$number - 1"/>
+      </call-template>
+    </if>
+    <call-template name="fizzbuzz">
+      <with-param name="number" select="$number"/>
+    </call-template>
   </template>
 
   <template name="fizzbuzz">
@@ -22,11 +34,6 @@
         <with-param name="number" select="$number"/>
       </call-template>
     </variable>
-    <if test="$number &gt; 1">
-      <call-template name="fizzbuzz">
-        <with-param name="number" select="$number - 1"/>
-      </call-template>
-    </if>
     <choose>
       <when test="string-length($fizzbuzz) &gt; 0">
         <value-of select="$fizzbuzz"/>
